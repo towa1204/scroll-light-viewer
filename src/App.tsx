@@ -1,24 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useCallback} from 'react';
+import { useDropzone } from 'react-dropzone';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Scroll Light Viewer</h1>
+      <InputFilesArea />
+    </div>
+  );
+}
+
+const InputFilesArea = () => {
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    console.log('acceptedFiles:', acceptedFiles);
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  const style = {
+    width: 400,
+    height: 300,
+    margin: "0 auto",
+    border: "1px dotted #888"
+  };
+
+  return (
+    <div {...getRootProps()} style={style}>
+      <input {...getInputProps()} />
+      {
+          isDragActive ?
+              <p>ここにドラッグ&ドロップ</p> :
+              <p>画像・動画ファイルをドロップ</p>
+      }
     </div>
   );
 }
