@@ -1,22 +1,21 @@
-import React, {useCallback} from 'react';
+import React, {useState, useCallback} from 'react';
 import { useDropzone } from 'react-dropzone';
 import './App.css';
 
 const App = () => {
+  const [files, setFiles] = useState<File[]>([]);
   return (
     <div className="App">
       <h1>Scroll Light Viewer</h1>
-      <InputFilesArea />
+      <InputFilesArea setFiles={(acceptedFiles: File[]) => {setFiles([...files, ...acceptedFiles])}} />
+      <ViewFilesName files={files} />
     </div>
   );
 }
 
-const InputFilesArea = () => {
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    console.log('acceptedFiles:', acceptedFiles);
-  }, []);
+const InputFilesArea = (props: {setFiles: (acceptedFiles: File[])=> void}) => {
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: acceptedFiles => {props.setFiles(acceptedFiles)} });
 
   const style = {
     width: 400,
@@ -34,6 +33,16 @@ const InputFilesArea = () => {
               <p>画像・動画ファイルをドロップ</p>
       }
     </div>
+  );
+}
+
+
+const ViewFilesName = (props: {files: File[]}) => {
+  const listFiles = props.files.map((file, index) =>
+    <li key={index}>{file.name}</li>
+  );
+  return (
+    <ul>{listFiles}</ul>
   );
 }
 
