@@ -55,15 +55,24 @@ const InputFilesArea = (props: {appendFiles: (acceptedFiles: File[]) => void}) =
   );
 }
 
+const viewStyle = {
+  maxWidth: "100%",
+};
+
+const viewer = {
+  width: "80%",
+  margin: "0 auto",
+};
+
 const ViewFilesName = (props: {files: Array<File & {preview: string}>}) => {
   const listFiles = props.files.map((file, index) => {
     if (file.type === "video/mp4") {
-      return <video key={index} src={file.preview} controls />
+      return <div key={index} ><video style={viewStyle} src={file.preview} controls /></div>
     }
-    return <img key={index} src={file.preview} />
+    return <div key={index} ><img style={viewStyle} src={file.preview} /></div>
   });
   return (
-    <div>{listFiles}</div>
+    <div id="viewer" style={viewer}>{listFiles}</div>
   );
 }
 
