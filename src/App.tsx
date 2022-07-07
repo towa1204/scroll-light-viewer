@@ -25,6 +25,12 @@ const App = () => {
 const InputFilesArea = (props: {appendFiles: (acceptedFiles: File[]) => void}) => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
+    accept: {
+      'image/png': ['.png'],
+      'image/jpeg': ['.jpg', '.jpeg'],
+      'image/webp': ['.webp'],
+      'video/mp4': ['.mp4']
+    },
     onDrop: acceptedFiles => {
       props.appendFiles(acceptedFiles)
     } 
@@ -49,11 +55,13 @@ const InputFilesArea = (props: {appendFiles: (acceptedFiles: File[]) => void}) =
   );
 }
 
-
 const ViewFilesName = (props: {files: Array<File & {preview: string}>}) => {
-  const listFiles = props.files.map((file) =>
-    <img src={file.preview} />
-  );
+  const listFiles = props.files.map((file, index) => {
+    if (file.type === "video/mp4") {
+      return <video key={index} src={file.preview} controls />
+    }
+    return <img key={index} src={file.preview} />
+  });
   return (
     <div>{listFiles}</div>
   );
