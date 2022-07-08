@@ -34,6 +34,14 @@ module.exports = {
     'no-use-before-define': 'off', // 関数や変数が定義される前に使われているとエラーになるデフォルトの機能をoff
     '@typescript-eslint/no-use-before-define': 'off',
     'import/prefer-default-export': 'off', // named exportがエラーになるので使えるようにoff
+    'react/function-component-definition': [
+      // 関数コンポーネント定義で、アロー関数以外受け付けない設定
+      2,
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
     // importのときに以下の拡張子を記述しなくてもエラーにしない
     'import/extensions': [
       'error',
