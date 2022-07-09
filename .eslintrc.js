@@ -34,6 +34,8 @@ module.exports = {
     'no-use-before-define': 'off', // 関数や変数が定義される前に使われているとエラーになるデフォルトの機能をoff
     '@typescript-eslint/no-use-before-define': 'off',
     'import/prefer-default-export': 'off', // named exportがエラーになるので使えるようにoff
+    'jsx-a11y/alt-text': 'off', // 代替テキスト必須の無効化
+    'jsx-a11y/media-has-caption': 'off', // ビデオの代替テキスト必須の無効化
     'react/function-component-definition': [
       // 関数コンポーネント定義で、アロー関数以外受け付けない設定
       2,
