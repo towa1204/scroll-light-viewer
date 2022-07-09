@@ -57,6 +57,7 @@ const InputFilesArea = ({ appendFiles }: { appendFiles: (acceptedFiles: File[]) 
 
 const viewStyle = {
   maxWidth: '100%',
+  maxHeight: '100vh',
 };
 
 const viewer = {
