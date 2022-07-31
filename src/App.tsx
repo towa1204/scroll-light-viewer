@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import './App.css';
 
+type MediaFile = File & { preview: string };
+
 const App = () => {
-  const [files, setFiles] = useState<Array<File & { preview: string }>>([]);
+  const [files, setFiles] = useState<Array<MediaFile>>([]);
 
   const appendFiles = (acceptedFiles: File[]) => {
     // [...files, ...acceptedFiles] ファイルが追加されるごとにファイルリストを追加
@@ -22,7 +24,7 @@ const App = () => {
     <div className="App">
       <h1>Scroll Light Viewer</h1>
       <InputFilesArea appendFiles={appendFiles} />
-      <ViewFilesName files={files} />
+      <ViewFiles files={files} />
     </div>
   );
 };
@@ -65,7 +67,7 @@ const viewer = {
   margin: '0 auto',
 };
 
-const ViewFilesName = ({ files }: { files: Array<File & { preview: string }> }) => {
+const ViewFiles = ({ files }: { files: Array<MediaFile> }) => {
   const listFiles = files.map((file) => {
     if (file.type === 'video/mp4') {
       // file.nameをkeyにするのはあまりよくない気がしてる
