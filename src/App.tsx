@@ -30,7 +30,7 @@ const App = () => {
 };
 
 const InputFilesArea = ({ appendFiles }: { appendFiles: (acceptedFiles: File[]) => void }) => {
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     accept: {
       'image/png': ['.png'],
       'image/jpeg': ['.jpg', '.jpeg'],
@@ -40,19 +40,32 @@ const InputFilesArea = ({ appendFiles }: { appendFiles: (acceptedFiles: File[]) 
     onDrop: (acceptedFiles) => {
       appendFiles(acceptedFiles);
     },
+    noClick: true,
   });
 
-  const style = {
+  const borderNormalStyle = {
     width: 400,
     height: 300,
     margin: '0 auto',
     border: '1px dotted #888',
   };
+  const borderDragStyle = {
+    width: 400,
+    height: 300,
+    margin: '0 auto',
+    border: '1px solid #00f',
+    transition: 'border .5s ease-in-out',
+    backgroundColor: '#2e2e2e',
+    opacity: 0.5,
+  };
 
   return (
-    <div {...getRootProps()} style={style}>
+    <div {...getRootProps()} style={isDragActive ? borderDragStyle : borderNormalStyle}>
       <input {...getInputProps()} />
       {isDragActive ? <p>ここにドラッグ&ドロップ</p> : <p>画像・動画ファイルをドロップ</p>}
+      <button type="button" onClick={open}>
+        画像・動画ファイルを選択
+      </button>
     </div>
   );
 };
