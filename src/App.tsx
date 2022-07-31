@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import './App.css';
 
@@ -21,15 +21,22 @@ const App = () => {
   };
 
   return (
-    <div className="App">
+    <div className="App" style={{ height: '100%' }}>
       <h1>Scroll Light Viewer</h1>
-      <InputFilesArea appendFiles={appendFiles} />
-      <ViewFiles files={files} />
+      <InputFilesArea appendFiles={appendFiles}>
+        <ViewFiles files={files} />
+      </InputFilesArea>
     </div>
   );
 };
 
-const InputFilesArea = ({ appendFiles }: { appendFiles: (acceptedFiles: File[]) => void }) => {
+const InputFilesArea = ({
+  appendFiles,
+  children,
+}: {
+  appendFiles: (acceptedFiles: File[]) => void;
+  children: ReactNode;
+}) => {
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     accept: {
       'image/png': ['.png'],
@@ -44,14 +51,14 @@ const InputFilesArea = ({ appendFiles }: { appendFiles: (acceptedFiles: File[]) 
   });
 
   const borderNormalStyle = {
-    width: 400,
-    height: 300,
+    width: '90%',
+    height: '100%',
     margin: '0 auto',
     border: '1px dotted #888',
   };
   const borderDragStyle = {
-    width: 400,
-    height: 300,
+    width: '90%',
+    height: '100%',
     margin: '0 auto',
     border: '1px solid #00f',
     transition: 'border .5s ease-in-out',
@@ -66,21 +73,17 @@ const InputFilesArea = ({ appendFiles }: { appendFiles: (acceptedFiles: File[]) 
       <button type="button" onClick={open}>
         画像・動画ファイルを選択
       </button>
+      {children}
     </div>
   );
 };
 
-const viewStyle = {
-  maxWidth: '100%',
-  maxHeight: '100vh',
-};
-
-const viewer = {
-  width: '80%',
-  margin: '0 auto',
-};
-
 const ViewFiles = ({ files }: { files: Array<MediaFile> }) => {
+  const viewStyle = {
+    maxWidth: '100%',
+    maxHeight: '100vh',
+  };
+
   const listFiles = files.map((file) => {
     if (file.type === 'video/mp4') {
       // file.nameをkeyにするのはあまりよくない気がしてる
@@ -96,8 +99,9 @@ const ViewFiles = ({ files }: { files: Array<MediaFile> }) => {
       </div>
     );
   });
+
   return (
-    <div id="viewer" style={viewer}>
+    <div id="viewer" style={{ width: '80%', margin: '0 auto' }}>
       {listFiles}
     </div>
   );
