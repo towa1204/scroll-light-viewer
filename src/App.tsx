@@ -25,7 +25,8 @@ const App = () => {
   return (
     <div className="App">
       <h1>Scroll Light Viewer</h1>
-      <h3>画像・動画ファイルを縦スクロールして閲覧できます</h3>
+      <h3>画像・動画ファイルを縦スクロールして閲覧</h3>
+      <p>ファイルは外部に送信されません</p>
       <div id="wrapper">
         <InputFilesArea appendFiles={appendFiles}>
           <ViewFiles files={files} />
