@@ -3,6 +3,7 @@
 import React, { ReactNode, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import './App.css';
+import topIcon from './assets/top.png';
 
 type MediaFile = File & { preview: string };
 
@@ -99,7 +100,7 @@ const ViewFiles = ({ files }: { files: Array<MediaFile> }) => {
 
 const ScrollButton = () => (
   <a href="#" className="btn-circle-border-simple scroll">
-    <img src="/top.png" />
+    <img src={topIcon} />
   </a>
 );
 
