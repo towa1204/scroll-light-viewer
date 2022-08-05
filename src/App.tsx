@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { ReactNode, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
@@ -24,9 +25,12 @@ const App = () => {
     <div className="App">
       <h1>Scroll Light Viewer</h1>
       <h3>画像・動画ファイルを縦スクロールして閲覧できます</h3>
-      <InputFilesArea appendFiles={appendFiles}>
-        <ViewFiles files={files} />
-      </InputFilesArea>
+      <div id="wrapper">
+        <InputFilesArea appendFiles={appendFiles}>
+          <ViewFiles files={files} />
+        </InputFilesArea>
+        <ScrollButton />
+      </div>
     </div>
   );
 };
@@ -92,5 +96,11 @@ const ViewFiles = ({ files }: { files: Array<MediaFile> }) => {
 
   return <div id="viewer">{listFiles}</div>;
 };
+
+const ScrollButton = () => (
+  <a href="#" className="btn-circle-border-simple scroll">
+    <img src="/top.png" />
+  </a>
+);
 
 export default App;

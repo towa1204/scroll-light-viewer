@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .App {
   text-align: center;
 }
@@ -40,4 +44,42 @@ video {
 .c-button:focus {
   outline: none;
   box-shadow: 0 0 0 4px #cbd6ee;
+}
+
+#wrapper {
+  display: flex;
+}
+
+.scroll {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10000;
+}
+
+.btn-circle-border-simple {
+  display: inline-block;
+  text-decoration: none;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  border-radius: 50%;
+  text-align: center;
+  overflow: hidden;
+  font-weight: bold;
+  transition: 0.4s;
+  opacity: 0.7;
+}
+
+.btn-circle-border-simple:hover {
+  opacity: 1;
+}
+
+@media (max-width: 750px) {
+  .btn-circle-border-simple {
+    font-size: 0.5rem;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+  }
 }
